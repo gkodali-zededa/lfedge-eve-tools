@@ -1,6 +1,7 @@
 # Copyright (c) 2019 Zededa, Inc.
 # SPDX-License-Identifier: Apache-2.0
 FROM debian:9.11 as build
+ARG COMMIT_ID=15f59c8bd33b1fd8581a74ae6e5ea145c8cb1b9b
 RUN apt update && \ 
     apt install -y bash libprotobuf-dev \
                    libprotoc-dev protobuf-compiler \
@@ -26,10 +27,10 @@ RUN cp proto/api.proto . && \
 RUN git clone https://github.com/Azure/iot-identity-service.git
 
 # This diff iot-identity-service.diff is tied to commit id
-# 15f59c8bd33b1fd8581a74ae6e5ea145c8cb1b9b of iot-identity-service
+# $COMMIT_ID of iot-identity-service
 RUN cp /iot-identity-service.diff iot-identity-service/ && \
     cd iot-identity-service && \
-    git reset --hard 15f59c8bd33b1fd8581a74ae6e5ea145c8cb1b9b && \
+    git reset --hard ${COMMIT_ID} && \
     git apply iot-identity-service.diff && \
     FORCE_NO_UNITTEST=1 make
 

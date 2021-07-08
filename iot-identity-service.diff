@@ -1,3 +1,12 @@
+/**
+ * Author: Gopi krishna Kodali (gkodali@zededa.com)
+ *
+ * This diff has code changes to make hsm module in aziot-tpm-sys to make use
+ * of the vtpm feature provided by lfedge-eve-tools.
+ * aziot-tpm-sys will now use lfedge-eve-tools shared library (libevetools.so)
+ * to talk to EVE control domain for getting the hardware TPM EK and signing any date with TPM etc.
+ */
+
 diff --git a/tpm/aziot-tpm-sys/azure-iot-hsm-c/CMakeLists.txt b/tpm/aziot-tpm-sys/azure-iot-hsm-c/CMakeLists.txt
 index 3409852..b735228 100644
 --- a/tpm/aziot-tpm-sys/azure-iot-hsm-c/CMakeLists.txt
